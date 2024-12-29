@@ -395,7 +395,7 @@
             <h2>Welcome to Bishnu Neupane (Anjal)'s Profile</h2>
             <p>Student of IT at Texas International College</p>
             <p>Email: <a href="mailto:anjalbabuneupane@gmail.com" style="color: #27ae60;">anjalbabuneupane@gmail.com</a></p>
-            <button type="button" onclick="sendEmail()">Contact Me</button>
+            <button type="button" onclick="openEmail()">Contact Me</button>
         </div>
     </section>
 
@@ -450,6 +450,15 @@
             </a>
         </div>
     </footer>
+
+    <script>
+        function openEmail() {
+            const subject = encodeURIComponent("Project Inquiry");
+            const body = encodeURIComponent("Hi Anjal,\n\nI am interested in working on a project with you. Please tell me what kind of project you want to make.\n\nBest regards,\n[Your Name]");
+            const mailtoLink = `mailto:anjalbabuneupane@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
 
 </body>
 
