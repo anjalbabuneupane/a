@@ -428,12 +428,15 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <h2>Contact Me</h2>
-        <form action="mailto:anjalbabuneupane@gmail.com" method="post" enctype="text/plain">
+        <form id="contact-form" action="mailto:anjalbabuneupane@gmail.com" method="post" enctype="text/plain">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
+            <button type="submit" onclick="showThanks(event)">Send Message</button>
         </form>
+        <div id="thank-you-message" style="display: none;">
+            <h3>Thanks for submitting, keep in touch!</h3>
+        </div>
     </section>
 
     <!-- Footer -->
