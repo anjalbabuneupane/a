@@ -335,7 +335,14 @@
             window.addEventListener('deviceorientation', (event) => {
                 let beta = event.beta; // Device tilt on X-axis
                 let gamma = event.gamma; // Device tilt on Y-axis
-                aboutSection.style.transform = `rotateX(${beta / 2}deg) rotateY(${gamma / 2}deg)`;
+
+                // Limit the range of movement
+                let maxTilt = 15; // Max tilt for mobile (to avoid excessive movement)
+                let limitedBeta = Math.max(Math.min(beta, maxTilt), -maxTilt); // Clamp beta value
+                let limitedGamma = Math.max(Math.min(gamma, maxTilt), -maxTilt); // Clamp gamma value
+
+                // Apply rotation with limited tilt
+                aboutSection.style.transform = `rotateX(${limitedBeta / 2}deg) rotateY(${limitedGamma / 2}deg)`;
             });
         }
 
