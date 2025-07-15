@@ -2,478 +2,492 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bishnu Neupane (Anjal) - IT Student</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bishnu Neupane (Anjal) - IT Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CDN for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-        body {
-            background: #111; /* Dark background (Black) */
-            color: #fff; /* Light text for contrast */
-            overflow-x: hidden;
-            height: 100vh;
-            perspective: 1500px; /* Perspective for 3D effect */
-            transition: all 1s ease-out;
-        }
+        body {
+            background: #111; /* Dark background (Black) */
+            color: #fff; /* Light text for contrast */
+            overflow-x: hidden;
+            height: 100vh;
+            perspective: 1500px; /* Perspective for 3D effect */
+            transition: all 1s ease-out;
+        }
 
-        header {
-            background: rgba(0, 0, 0, 0.7); /* Dark transparent background */
-            color: #fff;
-            padding: 30px 40px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
+        header {
+            background: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+            color: #fff;
+            padding: 30px 40px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
-        nav a {
-            color: #fff; /* White text for links */
-            margin: 0 20px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        nav a {
+            color: #fff; /* White text for links */
+            margin: 0 20px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
-        nav a:hover {
-            color: #27ae60; /* Green hover effect */
-        }
+        nav a:hover {
+            color: #27ae60; /* Green hover effect */
+        }
 
-        /* Hero Section */
-        .hero {
-            background-color: #111;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            color: #fff;
-            flex-direction: column;
-        }
+        /* Hero Section */
+        .hero {
+            background-color: #111;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: #fff;
+            flex-direction: column;
+        }
 
-        .hero .image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            object-fit: cover;
-        }
+        .hero .image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
 
-        .hero .content {
-            z-index: 1;
-            text-align: center;
-        }
+        .hero .content {
+            z-index: 1;
+            text-align: center;
+        }
 
-        .hero h2 {
-            font-size: 2.5em;
-            font-weight: 700;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        }
+        .hero h2 {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
-        .hero p {
-            font-size: 1.2em;
-            margin: 15px 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .hero p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        .hero button {
-            background-color: #27ae60;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            /* Added margin-right to separate buttons */
-            margin: 10px; /* Added margin to separate buttons */
-        }
+        .hero button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 10px;
+        }
 
-        .hero button:hover {
-            background-color: #16a085; /* Darker green on hover */
-            transform: scale(1.1);
-        }
+        .hero button:hover {
+            background-color: #16a085; /* Darker green on hover */
+            transform: scale(1.1);
+        }
 
-        /* About Section with 3D Animation */
-        .about-container {
-            padding: 80px 20px;
-            background: #f4f4f4;
-            text-align: center;
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1500px; /* Adds perspective to the 3D effect */
-        }
+        /* About Section with 3D Animation */
+        .about-container {
+            padding: 80px 20px;
+            background: #f4f4f4;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px; /* Adds perspective to the 3D effect */
+        }
 
-        .about {
-            width: 70%;
-            padding: 40px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transform-style: preserve-3d;
-            transform: rotateY(0deg);
-            transition: transform 1s ease-out;
-        }
+        .about {
+            width: 70%;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 1s ease-out;
+        }
 
-        .about img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-top: 20px;
-            object-fit: cover;
-            transform: translateZ(50px); /* Adds a pop effect on hover */
-            transition: transform 0.5s ease-in-out;
-        }
+        .about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-top: 20px;
+            object-fit: cover;
+            transform: translateZ(50px); /* Adds a pop effect on hover */
+            transition: transform 0.5s ease-in-out;
+        }
 
-        .about h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            color: black;
-        }
+        .about h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
 
-        .about p {
-            font-size: 1.1em;
-            color: black;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        .about p {
+            font-size: 1.1em;
+            color: black;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-        /* Services Section */
-        .services {
-            padding: 60px 20px;
-            background: #fff;
-            text-align: center;
-        }
+        /* Services Section */
+        .services {
+            padding: 60px 20px;
+            background: #fff;
+            text-align: center;
+        }
 
-        .services h2 {
-            font-size: 2.2em;
-            color: #333;
-            margin-bottom: 40px;
-        }
+        .services h2 {
+            font-size: 2.2em;
+            color: #333;
+            margin-bottom: 40px;
+        }
 
-        .service-card {
-            display: inline-block;
-            width: 280px;
-            padding: 30px;
-            margin: 20px;
-            background-color: #f4f4f4;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: left;
-        }
+        .service-card {
+            display: inline-block;
+            width: 280px;
+            padding: 30px;
+            margin: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+        }
 
-        .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
 
-        .service-card h3 {
-            font-size: 1.6em;
-            margin-bottom: 15px;
-            color: #27ae60;
-        }
+        .service-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #27ae60;
+        }
 
-        .service-card p {
-            font-size: 1.1em;
-            color: #333;
-        }
+        .service-card p {
+            font-size: 1.1em;
+            color: #333;
+        }
 
-        /* Contact Section */
-        .contact {
-            padding: 80px 20px;
-            background: #f4f4f4;
-            text-align: center;
-        }
+        /* Contact Section */
+        .contact {
+            padding: 80px 20px;
+            background: #f4f4f4;
+            text-align: center;
+        }
 
-        .contact h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: #333;
-        }
+        .contact h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #333;
+        }
 
-        .contact form input,
-        .contact form textarea {
-            width: 80%;
-            padding: 15px;
-            margin: 10px 0;
-            font-size: 1.2em;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+        .contact form input,
+        .contact form textarea {
+            width: 80%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.2em;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
 
-        .contact form button {
-            background-color: #27ae60;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            font-size: 1.2em;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
+        .contact form button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
 
-        .contact form button:hover {
-            background-color: #16a085;
-        }
+        .contact form button:hover {
+            background-color: #16a085;
+        }
 
-        footer {
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-        }
+        footer {
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
 
-        footer p {
-            font-size: 1em;
-        }
+        footer p {
+            font-size: 1em;
+        }
 
-        /* Social Media Icons Style */
-        .social-icons {
-            margin-top: 20px;
-        }
+        /* Social Media Icons Style */
+        .social-icons {
+            margin-top: 20px;
+        }
 
-        .social-icons a {
-            color: #333;
-            font-size: 2em;
-            margin: 0 15px;
-            transition: color 0.3s ease;
-        }
+        .social-icons a {
+            color: #333;
+            font-size: 2em;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
 
-        .social-icons a:hover {
-            color: #27ae60; /* Green hover effect */
-        }
+        .social-icons a:hover {
+            color: #27ae60; /* Green hover effect */
+        }
 
-        /* Responsive Design (Mobile and Tablets) */
-        @media screen and (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
+        /* Responsive Design (Mobile and Tablets) */
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
 
-            nav a {
-                font-size: 1em;
-                margin: 0 10px;
-            }
+            nav a {
+                font-size: 1em;
+                margin: 0 10px;
+            }
 
-            .hero h2 {
-                font-size: 2em;
-            }
+            .hero h2 {
+                font-size: 2em;
+            }
 
-            .hero p {
-                font-size: 1em;
-            }
+            .hero p {
+                font-size: 1em;
+            }
 
-            .about {
-                width: 90%;
-                padding: 20px;
-            }
+            .about {
+                width: 90%;
+                padding: 20px;
+            }
 
-            .about img {
-                width: 120px;
-                height: 120px;
-            }
+            .about img {
+                width: 120px;
+                height: 120px;
+            }
 
-            .about h2 {
-                font-size: 2.2em;
-            }
+            .about h2 {
+                font-size: 2.2em;
+            }
 
-            .about p {
-                font-size: 1em;
-            }
+            .about p {
+                font-size: 1em;
+            }
 
-            .services h2 {
-                font-size: 2em;
-            }
+            .services h2 {
+                font-size: 2em;
+            }
 
-            .service-card {
-                width: 100%;
-                margin: 10px 0;
-            }
+            .service-card {
+                width: 100%;
+                margin: 10px 0;
+            }
 
-            .contact form input,
-            .contact form textarea {
-                width: 90%;
-            }
+            .contact form input,
+            .contact form textarea {
+                width: 90%;
+            }
 
-            .contact form button {
-                font-size: 1em;
-            }
+            .contact form button {
+                font-size: 1em;
+            }
 
-            footer p {
-                font-size: 0.9em;
-            }
-        }
+            footer p {
+                font-size: 0.9em;
+            }
+        }
 
-        @media screen and (max-width: 480px) {
-            header h1 {
-                font-size: 1.5em;
-            }
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 1.5em;
+            }
 
-            nav a {
-                font-size: 0.9em;
-                margin: 0 8px;
-            }
+            nav a {
+                font-size: 0.9em;
+                margin: 0 8px;
+            }
 
-            .hero h2 {
-                font-size: 1.8em;
-            }
+            .hero h2 {
+                font-size: 1.8em;
+            }
 
-            .hero p {
-                font-size: 0.9em;
-            }
+            .hero p {
+                font-size: 0.9em;
+            }
 
-            .about h2 {
-                font-size: 2em;
-            }
+            .about h2 {
+                font-size: 2em;
+            }
 
-            .about p {
-                font-size: 0.9em;
-            }
+            .about p {
+                font-size: 0.9em;
+            }
 
-            .contact form input,
-            .contact form textarea {
-                width: 95%;
-            }
+            .contact form input,
+            .contact form textarea {
+                width: 95%;
+            }
 
-            .contact form button {
-                padding: 12px 25px;
-                font-size: 1em;
-            }
+            .contact form button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
 
-            footer p {
-                font-size: 0.8em;
-            }
-        }
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4P4CYWD8N"></script>
+            footer p {
+                font-size: 0.8em;
+            }
+        }
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4P4CYWD8N"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-Y4P4CYWD8N');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y4P4CYWD8N');
 </script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4P4CYWD8N"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y4P4CYWD8N');
-    </script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4P4CYWD8N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y4P4CYWD8N');
+    </script>
 </head>
 
 
-    </style>
+    </style>
 </head>
 
 <body>
 
-        <header>
-        <h1>Bishnu Neupane (Anjal)</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+    <!-- Header -->
+    <header>
+        <h1>Bishnu Neupane (Anjal)</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-        <section class="hero">
-                <img src="anjal.jpg" alt="Bishnu Neupane (Anjal)" class="image">
-        <div class="content">
-            <h2>Welcome to Bishnu Neupane (Anjal)'s Profile</h2>
-            <p>Student of IT at Texas International College</p>
-            <p>Email: <a href="mailto:anjalbabuneupane@gmail.com" style="color: #27ae60;">anjalbabuneupane@gmail.com</a></p>
-            <button type="button" onclick="openEmail()">Contact Me</button>
-                        <button type="button" onclick="window.location.href='game.html'">Anjal Game</button>
-        </div>
-    </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Your photo here -->
+        <img src="anjal.jpg" alt="Bishnu Neupane (Anjal)" class="image">
+        <div class="content">
+            <h2>Welcome to Bishnu Neupane (Anjal)'s Profile</h2>
+            <p>Student of IT at Texas International College</p>
+            <p>Email: <a href="mailto:anjalbabuneupane@gmail.com" style="color: #27ae60;">anjalbabuneupane@gmail.com</a></p>
+            <button type="button" onclick="openEmail()">Contact Me</button>
+            <button type="button" onclick="window.location.href='game.html'">Anjal AI exercise</button>
+        </div>
+    </section>
 
-        <section id="about" class="about-container">
-        <div class="about">
-            <h2>About Me</h2>
-            <p>Hi, I am Bishnu Neupane (Anjal), currently pursuing a degree in IT at Texas International College. I am passionate about technology and its impact on the future. I am dedicated to growing my skills and exploring new opportunities in the IT field.</p>
-            <img src="bbu.jpg" alt="Bishnu Neupane (Anjal)">
-        </div>
-    </section>
+    <!-- About Section -->
+    <section id="about" class="about-container">
+        <div class="about">
+            <h2>About Me</h2>
+            <p>Hi, I am Bishnu Neupane (Anjal), currently pursuing a degree in IT at Texas International College. I am passionate about technology and its impact on the future. I am dedicated to growing my skills and exploring new opportunities in the IT field.</p>
+            <img src="bbu.jpg" alt="Bishnu Neupane (Anjal)">
+        </div>
+    </section>
 
-        <section id="services" class="services">
-        <h2>My Services</h2>
-        <div class="service-card">
-            <h3>Web Development</h3>
-            <p>Creating dynamic and responsive websites.</p>
-        </div>
-        <div class="service-card">
-            <h3>App Development</h3>
-            <p>Developing mobile applications for Android and iOS.</p>
-        </div>
-        <div class="service-card">
-            <h3>Consulting</h3>
-            <p>Providing expert advice for tech projects.</p>
-        </div>
-    </section>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>My Services</h2>
+        <div class="service-card">
+            <h3>Web Development</h3>
+            <p>Creating dynamic and responsive websites.</p>
+        </div>
+        <div class="service-card">
+            <h3>App Development</h3>
+            <p>Developing mobile applications for Android and iOS.</p>
+        </div>
+        <div class="service-card">
+            <h3>Consulting</h3>
+            <p>Providing expert advice for tech projects.</p>
+        </div>
+    </section>
 
-    
-    
+    
+    
 
-        <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <form id="contact-form" action="mailto:anjalbabuneupane@gmail.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-            <button type="submit" onclick="showThanks(event)">Send Message</button>
-        </form>
-        <div id="thank-you-message" style="display: none;">
-            <h3>Thanks for submitting, keep in touch!</h3>
-        </div>
-    </section>
-            <footer>
-        <p>&copy; 2025 Bishnu Neupane (Anjal). All Rights Reserved.</p>
-        
-                <div class="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=100051024575363" target="_blank">
-                <i class="fab fa-facebook-square"></i>
-            </a>
-            <a href="https://www.instagram.com/anjal__neupane__7/" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-    </footer>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form" action="mailto:anjalbabuneupane@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit" onclick="showThanks(event)">Send Message</button>
+        </form>
+        <div id="thank-you-message" style="display: none;">
+            <h3>Thanks for submitting, keep in touch!</h3>
+        </div>
+    </section>
+<!-- Embed Google Slides Presentation -->
 
-    <script>
-        function openEmail() {
-            const subject = encodeURIComponent("Project Inquiry");
-            const body = encodeURIComponent("Hi Anjal,\n\nI am interested in working on a project with you. Please tell me what kind of project you want to make.\n\nBest regards,\n[Your Name]");
-            const mailtoLink = `mailto:anjalbabuneupane@gmail.com?subject=${subject}&body=${body}`;
-            window.location.href = mailtoLink;
-        }
-    </script>
+    <!-- Download Presentation Link -->
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Bishnu Neupane (Anjal). All Rights Reserved.</p>
+        
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=100051024575363" target="_blank">
+                <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="https://www.instagram.com/anjal__neupane__7/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function openEmail() {
+            const subject = encodeURIComponent("Project Inquiry");
+            const body = encodeURIComponent("Hi Anjal,\n\nI am interested in working on a project with you. Please tell me what kind of project you want to make.\n\nBest regards,\n[Your Name]");
+            const mailtoLink = `mailto:anjalbabuneupane@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
 
 </body>
 
