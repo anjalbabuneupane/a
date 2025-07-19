@@ -1,1 +1,29 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fruit Catcher Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <video id="webcam" width="800" height="600" style="display:none;"></video>
+  <div id="scoreboard">
+    <span id="score">Score: 0</span>
+    <span id="missed">Missed: 0</span>
+    <span id="highScore">High Score: 0</span>
+  </div>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <div id="cameraOverlay" style="position:absolute;left:0;top:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);color:#fff;z-index:200;font-size:2rem;">
+    Waiting for camera and hand detection to be ready...
+  </div>
+  <div id="gameOver" style="display:none;">
+    <h2>Game Over!</h2>
+    <p id="finalScore"></p>
+    <p id="finalHighScore"></p>
+    <button onclick="window.location.reload()">Restart</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>``
