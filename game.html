@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,7 +193,7 @@
 
         /* Video and canvas element styling */
         video, canvas {
-            width: 100%;
+            width: 50%;
             height: 100%;
             object-fit: cover; /* Ensures video/canvas covers the container */
             transform: scaleX(-1); /* Flip video horizontally for mirror effect */
@@ -691,8 +692,9 @@
 
         <nav class="nav-tabs">
             <div class="nav-tab active" data-tab="fitness-coach">Fitness Coach</div>
-            <div class="nav-tab" data-tab="lane-dodge-game">Lane Dodge</div>
             <div class="nav-tab" data-tab="fruit-catch-game">Fruit Catch</div>
+            <div class ="nav-tab" ><a href="http://localhost:3000/game">Exercise Game</a> </div>
+            
         </nav>
 
         <!-- Fitness Coach Section -->
@@ -717,7 +719,7 @@
                         <div class="panel-title">Your Virtual Coach</div>
                     </div>
                     <div class="animation-container">
-                        <div class="animation-character">
+                        <div class="animation-character" style="display:none ;">
                             <!-- Virtual coach character elements - positioned and styled by JS -->
                             <div class="character-body"></div>
                             <div class="character-head"></div>
@@ -726,6 +728,7 @@
                             <div class="character-leg" id="left-leg"></div>
                             <div class="character-leg" id="right-leg"></div>
                         </div>
+                        <video src="coach_video.mp4" autoplay loop muted ></video>
                     </div>
                 </div>
             </div>
@@ -821,9 +824,7 @@
                         <!-- Game-specific controls and instructions will be injected here by JS -->
                     </div>
                     <div class="game-action-buttons">
-                        <button class="btn btn-primary" id="game-start-btn">
-                            <span>▶</span> Start Game
-                        </button>
+                        <button class="btn btn-primary" ><a href="./gamee.html">Fruit Catch</a></button>~
                         <button class="btn btn-outline" id="game-reset-btn">
                             <span>↻</span> Reset Game
                         </button>
