@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fitness Coach & VR Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">AI Fitness Coach</div>
+            <div class="user-profile">
+                <div class="avatar">BN</div>
+                <span>Bishnu Neupane</span>
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <div class="nav-tab active" data-tab="fitness-coach">Fitness Coach</div>
+            <div class="nav-tab" data-tab="lane-dodge-game">Lane Dodge</div>
+            <div class="nav-tab" data-tab="fruit-catch-game">Fruit Catch</div>
+        </nav>
+
+        <!-- Fitness Coach Section -->
+        <div id="fitness-coach-section" class="content-section active">
+            <div class="main-content">
+                <div class="video-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Your Camera</div>
+                        <div class="view-toggle">
+                            <button class="toggle-btn active" data-view="detailed">Detailed</button>
+                            <button class="toggle-btn" data-view="simple">Simple</button>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <video id="webcam" autoplay playsinline></video>
+                        <canvas id="output"></canvas>
+                    </div>
+                </div>
+
+                <div class="animation-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Your Virtual Coach</div>
+                    </div>
+                    <div class="animation-container">
+                        <div class="animation-character">
+                            <!-- Virtual coach character elements - positioned and styled by JS -->
+                            <div class="character-body"></div>
+                            <div class="character-head"></div>
+                            <div class="character-arm" id="left-arm"></div>
+                            <div class="character-arm" id="right-arm"></div>
+                            <div class="character-leg" id="left-leg"></div>
+                            <div class="character-leg" id="right-leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <h2>Select Exercise</h2>
+                <div class="exercise-selector">
+                    <div class="exercise-card active" data-exercise="wall_angels">
+                        <div class="exercise-icon">🧘</div>
+                        <div class="exercise-name">Wall Angels</div>
+                        <div class="exercise-duration">30 seconds</div>
+                    </div>
+                    <div class="exercise-card" data-exercise="cat_cow">
+                        <div class="exercise-icon">🐱</div>
+                        <div class="exercise-name">Cat-Cow</div>
+                        <div class="exercise-duration">45 seconds</div>
+                    </div>
+                    <div class="exercise-card" data-exercise="spinal_twist">
+                        <div class="exercise-icon">🔄</div>
+                        <div class="exercise-name">Spinal Twist</div>
+                        <div class="exercise-duration">30 seconds</div>
+                    </div>
+                </div>
+
+                <div class="feedback-panel">
+                    <div class="feedback-card">
+                        <div class="feedback-label">Current Score</div>
+                        <div class="feedback-value" id="score">-</div>
+                        <div class="feedback-label">out of 10</div>
+                    </div>
+                    <div class="feedback-card">
+                        <div class="feedback-label">Time Left</div>
+                        <div class="feedback-value" id="time-left">0</div>
+                        <div class="feedback-label">seconds</div>
+                    </div>
+                    <div class="feedback-card">
+                        <div class="feedback-label">Reps</div>
+                        <div class="feedback-value" id="reps">0</div>
+                        <div class="feedback-label">completed</div>
+                    </div>
+                    <div class="feedback-card">
+                        <div class="feedback-label">Perfect Reps</div>
+                        <div class="feedback-value" id="perfect-reps">0</div>
+                        <div class="feedback-label">great job!</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="start-btn">
+                        <span>▶</span> Start Exercise
+                    </button>
+                    <button class="btn btn-outline" id="reset-btn">
+                        <span>↻</span> Reset
+                    </button>
+                    <button class="btn btn-primary" id="get-feedback-btn">
+                         Get Feedback
+                    </button>
+                </div>
+            </div>
+
+            <div class="instructions-panel">
+                <h2>Instructions</h2>
+                <div class="instructions-list" id="instructions-list">
+                    <!-- Instructions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- LLM Feedback Panel -->
+            <div class="llm-feedback-panel" id="llm-feedback-panel">
+                <h2>AI Coach Feedback</h2>
+                <div class="llm-loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating personalized feedback...</p>
+                </div>
+                <p id="llm-feedback-content">
+                    <!-- LLM generated feedback will be displayed here -->
+                </p>
+            </div>
+        </div>
+
+        <!-- VR Games Section (Unified Canvas) -->
+        <div id="vr-games-section" class="content-section">
+            <div class="game-section">
+                <div class="game-canvas-container">
+                    <canvas id="game-canvas"></canvas> <!-- Unified 3D canvas -->
+                    <div class="game-message-overlay" id="game-message-overlay">
+                        <p id="game-overlay-text">Game Over!</p>
+                        <button class="btn btn-primary" id="game-restart-btn">Restart Game</button>
+                    </div>
+                </div>
+                <div class="game-controls-panel">
+                    <div id="game-specific-controls">
+                        <!-- Game-specific controls and instructions will be injected here by JS -->
+                    </div>
+                    <div class="game-action-buttons">
+                        <button class="btn btn-primary" id="game-start-btn">
+                            <span>▶</span> Start Game
+                        </button>
+                        <button class="btn btn-outline" id="game-reset-btn">
+                            <span>↻</span> Reset Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Loading overlay for camera initialization -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <h2>Initializing Camera...</h2>
+        <p>Please allow camera access when prompted</p>
+    </div>
+
+    <!-- Custom message box (replaces alert()) -->
+    <div class="message-box" id="message-box">
+        <h3 id="message-box-title"></h3>
+        <p id="message-box-content"></p>
+        <button id="message-box-ok">OK</button>
+    </div>
+
+    <!-- MediaPipe Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // --- Global Variables and DOM Elements ---
+        const video = document.getElementById("webcam");
+        const canvas = document.getElementById("output");
+        const ctx = canvas.getContext("2d");
+        const loadingOverlay = document.getElementById("loading-overlay");
+        const messageBox = document.getElementById("message-box");
+        const messageBoxTitle = document.getElementById("message-box-title");
+        const messageBoxContent = document.getElementById("message-box-content");
+        const messageBoxOkBtn = document.getElementById("message-box-ok");
+
+        // Virtual coach character elements (for 2D view)
+        const characterBody = document.querySelector('.character-body');
+        const characterHead = document.querySelector('.character-head');
+        const leftArm = document.getElementById("left-arm");
+        const rightArm = document.getElementById("right-arm");
+        const leftLeg = document.getElementById("left-leg");
+        const rightLeg = document.getElementById("right-leg");
+        const animationCharacterContainer = document.querySelector('.animation-character');
+
+        // LLM Feedback elements
+        const getFeedbackBtn = document.getElementById("get-feedback-btn");
+        const llmFeedbackPanel = document.getElementById("llm-feedback-panel");
+        const llmFeedbackContent = document.getElementById("llm-feedback-content");
+        const llmLoadingSpinner = document.querySelector(".llm-loading-spinner");
+
+        // Navigation elements
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const fitnessCoachSection = document.getElementById('fitness-coach-section');
+        const vrGamesSection = document.getElementById('vr-games-section'); // Unified VR games section
+
+        // Common game UI elements (now managed by gameManager)
+        const gameCanvas = document.getElementById('game-canvas');
+        const gameMessageOverlay = document.getElementById('game-message-overlay');
+        const gameOverlayText = document.getElementById('game-overlay-text');
+        const gameRestartBtn = document.getElementById('game-restart-btn');
+        const gameStartBtn = document.getElementById('game-start-btn');
+        const gameResetBtn = document.getElementById('game-reset-btn');
+        const gameSpecificControlsDiv = document.getElementById('game-specific-controls');
+
+
+        // --- App State ---
+        let currentExercise = 'wall_angels';
+        let exerciseInProgress = false;
+        let repCount = 0;
+        let perfectReps = 0;
+        let simpleView = false;
+        let lastPoseTime = 0; // To help with rep counting logic
+        let repState = 'down'; // 'down' or 'up' for rep counting
+        let timerIntervalId = null; // Store timer interval ID to clear it
+        let averageScore = 0; // To store the average score for LLM feedback
+        let scoreSum = 0;
+        let scoreCount = 0;
+        let currentSection = 'fitness-coach'; // Tracks active section
+
+        // --- MediaPipe Pose Setup ---
+        const pose = new Pose({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+        });
+
+        pose.setOptions({
+            modelComplexity: 1, // 0, 1, or 2. 1 is good balance of accuracy and performance.
+            smoothLandmarks: true, // Smooths out jitter in landmarks
+            enableSegmentation: true, // Enables human segmentation mask
+            smoothSegmentation: true // Smooths out segmentation mask
+        });
+
+        // --- Exercise Configurations ---
+        const exercises = {
+            wall_angels: {
+                name: "Wall Angels",
+                instructions: [
+                    "Stand with your back against the wall, head, shoulders, and hips touching.",
+                    "Bend your elbows to 90 degrees, forearms flat against the wall.",
+                    "Slowly slide your arms straight up overhead, keeping forearms and wrists touching the wall.",
+                    "Lower slowly back to the start. Keep shoulders relaxed throughout."
+                ],
+                duration: 30, // seconds
+                scoreFn: scoreWallAngels,
+                repCheckFn: checkWallAngelsRep
+            },
+            cat_cow: {
+                name: "Cat-Cow Stretch",
+                instructions: [
+                    "Start on hands and knees in tabletop position, wrists under shoulders, knees under hips.",
+                    "For Cow (Inhale): Drop your belly towards the mat, lift your head and tailbone.",
+                    "For Cat (Exhale): Round your spine towards the ceiling, tuck your chin and pelvis.",
+                    "Move slowly and fluidly with your breath, transitioning between the two poses."
+                ],
+                duration: 45,
+                scoreFn: scoreCatCow,
+                repCheckFn: checkCatCowRep
+            },
+            spinal_twist: {
+                name: "Spinal Twist",
+                instructions: [
+                    "Sit tall with legs extended in front of you.",
+                    "Bend your right knee and place your right foot flat on the floor outside your left thigh.",
+                    "Place your right hand on the floor behind you, and hug your left elbow to your right knee.",
+                    "Gently twist your torso to the right, looking over your right shoulder. Hold, then repeat on the other side."
+                ],
+                duration: 30,
+                scoreFn: scoreSpinalTwist,
+                repCheckFn: checkSpinalTwistRep
+            }
+        };
+
+        // --- Helper Functions ---
+
+        /**
+         * Displays a custom message box.
+         * @param {string} title - The title of the message box.
+         * @param {string} content - The content/message to display.
+         */
+        function showMessageBox(title, content) {
+            messageBoxTitle.textContent = title;
+            messageBoxContent.textContent = content;
+            messageBox.style.display = 'block';
+        }
+
+        // Event listener for the message box OK button
+        messageBoxOkBtn.addEventListener('click', () => {
+            messageBox.style.display = 'none';
+        });
+
+        /**
+         * Calculates the angle (in degrees) between three points.
+         * p1 -- p2 -- p3
+         * @param {Object} p1 - First point {x, y}
+         * @param {Object} p2 - Second (vertex) point {x, y}
+         * @param {Object} p3 - Third point {x, y}
+         * @returns {number} Angle in degrees.
+         */
+        function calculateAngle(p1, p2, p3) {
+            if (!p1 || !p2 || !p3) return 0; // Return 0 if any point is undefined
+
+            const angleRad = Math.atan2(p3.y - p2.y, p3.x - p2.x) - Math.atan2(p1.y - p2.y, p1.x - p2.x);
+            let degrees = Math.abs(angleRad * 180.0 / Math.PI);
+            if (degrees > 180) {
+                degrees = 360 - degrees;
+            }
+            return degrees;
+        }
+
+        /**
+         * Calculates the Euclidean distance between two points.
+         * @param {Object} p1 - First point {x, y}
+         * @param {Object} p2 - Second point {x, y}
+         * @returns {number} Distance.
+         */
+        function calculateDistance(p1, p2) {
+            if (!p1 || !p2) return 0;
+            return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+        }
+
+        /**
+         * Checks if all required landmarks are visible (visibility > 0.7).
+         * @param {Array<Object>} landmarks - Array of MediaPipe pose landmarks.
+         * @param {Array<number>} indices - Array of landmark indices to check.
+         * @returns {boolean} True if all specified landmarks are visible.
+         */
+        function areLandmarksVisible(landmarks, indices) {
+            return indices.every(index => landmarks[index] && landmarks[index].visibility > 0.7);
+        }
+
+        // --- UI Initialization and Updates ---
+
+        // Initialize navigation tabs
+        function initNavTabs() {
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+
+                    // Deactivate all tabs and hide all sections
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+                    // Activate clicked tab and show target section
+                    tab.classList.add('active');
+
+                    // Handle section visibility
+                    if (targetTab === 'fitness-coach') {
+                        fitnessCoachSection.classList.add('active');
+                        vrGamesSection.classList.remove('active');
+                        gameManager.setGameMode(null); // No game active
+                    } else {
+                        fitnessCoachSection.classList.remove('active');
+                        vrGamesSection.classList.add('active');
+                        if (targetTab === 'lane-dodge-game') {
+                            gameManager.setGameMode(laneDodgeGame);
+                        } else if (targetTab === 'fruit-catch-game') {
+                            gameManager.setGameMode(fruitCatchGame);
+                        }
+                    }
+                    currentSection = targetTab;
+
+                    // Stop ongoing activities when switching sections
+                    if (exerciseInProgress) {
+                        resetExerciseState();
+                    }
+                });
+            });
+        }
+
+        // Initialize exercise selector buttons
+        function initExerciseSelector() {
+            const exerciseCards = document.querySelectorAll('.exercise-card');
+            exerciseCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    if (exerciseInProgress) {
+                        showMessageBox("Exercise in Progress", "Please reset the current exercise before changing.");
+                        return;
+                    }
+                    exerciseCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    currentExercise = card.dataset.exercise;
+                    updateInstructions();
+                    resetExerciseState(); // Reset feedback values when changing exercise
+                    llmFeedbackPanel.style.display = 'none'; // Hide LLM feedback when changing exercise
+                });
+            });
+        }
+
+        // Initialize view toggle buttons (Detailed/Simple)
+        function initViewToggle() {
+            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toggleBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    simpleView = btn.dataset.view === 'simple';
+                });
+            });
+        }
+
+        // Update instructions display based on selected exercise
+        function updateInstructions() {
+            const list = document.getElementById("instructions-list");
+            list.innerHTML = ''; // Clear existing instructions
+
+            exercises[currentExercise].instructions.forEach((instruction, index) => {
+                const item = document.createElement('div');
+                item.className = 'instruction-item';
+                item.innerHTML = `
+                    <div class="instruction-number">${index + 1}</div>
+                    <div>${instruction}</div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // Update feedback display (score, time, reps)
+        function updateFeedbackDisplay(score = '-', timeLeft = '0', reps = '0', perfectReps = '0') {
+            document.getElementById("score").textContent = score !== '-' ? score.toFixed(1) : '-';
+            document.getElementById("time-left").textContent = timeLeft;
+            document.getElementById("reps").textContent = reps;
+            document.getElementById("perfect-reps").textContent = perfectReps;
+        }
+
+        // Reset all exercise state and UI feedback
+        function resetExerciseState() {
+            exerciseInProgress = false;
+            repCount = 0;
+            perfectReps = 0;
+            repState = 'down'; // Reset rep state
+            averageScore = 0;
+            scoreSum = 0;
+            scoreCount = 0;
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+                timerIntervalId = null;
+            }
+            updateFeedbackDisplay(); // Reset UI to default
+            llmFeedbackPanel.style.display = 'none'; // Hide LLM feedback on reset
+            llmFeedbackContent.textContent = ''; // Clear previous feedback
+        }
+
+        // --- Pose Processing and Animation (for 2D coach) ---
+
+        // Process pose results from MediaPipe
+        pose.onResults((results) => {
+            // Update 2D coach animation only if fitness coach section is active
+            if (currentSection === 'fitness-coach') {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+                if (!video.videoWidth) return; // Ensure video is loaded
+
+                // Set canvas dimensions to match video
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Draw segmentation mask if available and not in simple view
+                if (results.segmentationMask && !simpleView) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'source-in';
+                    ctx.fillStyle = 'rgba(0, 255, 255, 0.1)'; // Light cyan overlay
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.restore();
+                }
+
+                // Draw pose landmarks and connections
+                if (results.poseLandmarks) {
+                    // Update virtual coach animation based on user's pose
+                    updateCharacterAnimation(results.poseLandmarks);
+
+                    // Draw pose on user's camera feed
+                    if (simpleView) {
+                        // Simple view: only draw main connections and landmarks
+                        drawConnectors(ctx, results.poseLandmarks, POSE_CONNECTIONS, {
+                            color: "#4361ee", // Primary color
+                            lineWidth: 4
+                        });
+                        drawLandmarks(ctx, results.poseLandmarks, {
+                            color: "#3f37c9", // Secondary color
+                            radius: 3
+                        });
+                    } else {
+                        // Detailed view: default MediaPipe colors
+                        drawConnectors(ctx, results.poseLandmarks, POSE_CONNECTIONS, {
+                            color: "#00FF00", // Green
+                            lineWidth: 4
+                        });
+                        drawLandmarks(ctx, results.poseLandmarks, {
+                            color: "#FF0000", // Red
+                            radius: 3
+                        });
+                    }
+
+                    // If exercise is in progress, calculate score and check for reps
+                    if (exerciseInProgress) {
+                        const score = exercises[currentExercise].scoreFn(results.poseLandmarks);
+                        if (!isNaN(score) && score >= 0) { // Only add valid scores
+                            scoreSum += score;
+                            scoreCount++;
+                            averageScore = scoreSum / scoreCount;
+                        }
+                        updateFeedbackDisplay(score, document.getElementById("time-left").textContent, repCount, perfectReps);
+
+                        // Check for rep completion using the specific exercise's rep check function
+                        exercises[currentExercise].repCheckFn(results.poseLandmarks, score);
+                    }
+                }
+            }
+
+            // Update 3D game avatar if any VR game section is active
+            if (currentSection === 'lane-dodge-game' || currentSection === 'fruit-catch-game') {
+                gameManager.updateAvatar(results.poseLandmarks);
+            }
+        });
+
+        /**
+         * Updates the virtual coach character animation to mirror the user's pose.
+         * This involves scaling and positioning the character's limbs based on detected landmarks.
+         * @param {Array<Object>} landmarks - Array of MediaPipe pose landmarks.
+         */
+        function updateCharacterAnimation(landmarks) {
+            if (!landmarks || landmarks.length < 29) {
+                // Hide character if no landmarks or not enough landmarks are detected
+                [characterBody, characterHead, leftArm, rightArm, leftLeg, rightLeg].forEach(el => el.style.display = 'none');
+                return;
+            } else {
+                // Show character if landmarks are detected
+                [characterBody, characterHead, leftArm, rightArm, leftLeg, rightLeg].forEach(el => el.style.display = 'block');
+            }
+
+            // Get the bounding box of the detected pose to normalize coordinates
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            landmarks.forEach(lm => {
+                if (lm.visibility > 0.5) {
+                    minX = Math.min(minX, lm.x);
+                    minY = Math.min(minY, lm.y);
+                    maxX = Math.max(maxX, lm.x);
+                    maxY = Math.max(maxY, lm.y);
+                }
+            });
+
+            // Handle cases where pose might be too small or flat (e.g., user far away or lying down)
+            const poseWidth = maxX - minX;
+            const poseHeight = maxY - minY;
+
+            // If pose is too small to calculate meaningful scale, hide character or use default
+            if (poseWidth === 0 || poseHeight === 0) {
+                 [characterBody, characterHead, leftArm, rightArm, leftLeg, rightLeg].forEach(el => el.style.display = 'none');
+                 return;
+            }
+
+            // Get the dimensions of the animation container
+            const charContainerWidth = animationCharacterContainer.offsetWidth;
+            const charContainerHeight = animationCharacterContainer.offsetHeight;
+
+            // Calculate scale factor to fit the pose within the animation container
+            const scaleFactor = Math.min(
+                charContainerWidth / poseWidth,
+                charContainerHeight / poseHeight
+            ) * 0.7; // Use 70% of the available space to give some padding
+
+            // Calculate offset to center the scaled pose
+            const offsetX = (charContainerWidth / 2) - ((minX + maxX) / 2) * scaleFactor;
+            const offsetY = (charContainerHeight / 2) - ((minY + maxY) / 2) * scaleFactor;
+
+            // Helper to transform a landmark from normalized (0-1) video coordinates
+            // to the pixel coordinates within the animation character container.
+            const transformLandmark = (lm) => ({
+                x: (lm.x * scaleFactor) + offsetX,
+                y: (lm.y * scaleFactor) + offsetY,
+                z: lm.z * scaleFactor // Z can be used for depth if needed
+            });
+
+            // Get transformed landmarks
+            const leftShoulder = transformLandmark(landmarks[11]);
+            const rightShoulder = transformLandmark(landmarks[12]);
+            const leftElbow = transformLandmark(landmarks[13]);
+            const rightElbow = transformLandmark(landmarks[14]);
+            const leftWrist = transformLandmark(landmarks[15]);
+            const rightWrist = transformLandmark(landmarks[16]);
+            const leftHip = transformLandmark(landmarks[23]);
+            const rightHip = transformLandmark(landmarks[24]);
+            const leftKnee = transformLandmark(landmarks[25]);
+            const rightKnee = transformLandmark(landmarks[26]);
+            const leftAnkle = transformLandmark(landmarks[27]);
+            const rightAnkle = transformLandmark(landmarks[28]);
+            const nose = transformLandmark(landmarks[0]);
+            const leftEar = transformLandmark(landmarks[7]); // For head orientation
+            const rightEar = transformLandmark(landmarks[8]); // For head orientation
+
+            // --- Animate Character Body and Head ---
+            if (leftShoulder && rightShoulder && leftHip && rightHip && nose) {
+                const midShoulderX = (leftShoulder.x + rightShoulder.x) / 2;
+                const midShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
+                const midHipX = (leftHip.x + rightHip.x) / 2;
+                const midHipY = (leftHip.y + rightHip.y) / 2;
+
+                // Position body between shoulders and hips
+                // The body div's top-left will be at midShoulder, and its height will extend to midHip
+                characterBody.style.left = `${midShoulderX - characterBody.offsetWidth / 2}px`;
+                characterBody.style.top = `${midShoulderY}px`;
+                characterBody.style.height = `${midHipY - midShoulderY}px`;
+                characterBody.style.width = `${calculateDistance(leftShoulder, rightShoulder) * 0.5}px`;
+
+                // Position head above shoulders
+                // Head's center should be roughly above midShoulder
+                characterHead.style.left = `${midShoulderX - characterHead.offsetWidth / 2}px`;
+                characterHead.style.top = `${midShoulderY - characterHead.offsetHeight}px`; // Place head above shoulders
+
+                // Optional: Rotate head based on ear positions for slight head tilt
+                if (leftEar && rightEar) {
+                    const headAngle = Math.atan2(rightEar.y - leftEar.y, rightEar.x - leftEar.x) * (180 / Math.PI);
+                    characterHead.style.transform = `rotate(${headAngle}deg)`;
+                } else {
+                    characterHead.style.transform = `rotate(0deg)`; // Reset if ears not visible
+                }
+            }
+
+            // --- Animate Limbs ---
+            // Helper function to apply limb transforms
+            function applyLimbTransform(limbElement, startJoint, endJoint) {
+                if (startJoint && endJoint) {
+                    const length = calculateDistance(startJoint, endJoint);
+                    const angle = Math.atan2(endJoint.y - startJoint.y, endJoint.x - startJoint.x); // Angle in radians
+
+                    limbElement.style.height = `${length}px`; // Set height based on distance
+                    limbElement.style.left = `${startJoint.x}px`;
+                    limbElement.style.top = `${startJoint.y}px`;
+                    // Rotate from the top center of the element, aligning it with the vector
+                    limbElement.style.transformOrigin = 'top center';
+                    // The element is initially vertical, so add 90 degrees to align with horizontal angle
+                    limbElement.style.transform = `translateX(-50%) rotate(${angle * (180 / Math.PI) + 90}deg)`;
+                } else {
+                    limbElement.style.display = 'none'; // Hide limb if joints not visible
+                }
+            }
+
+            // Arms: Shoulder to Elbow, Elbow to Wrist
+            // For a single arm div, we can approximate by drawing from shoulder to wrist directly
+            applyLimbTransform(leftArm, leftShoulder, leftWrist);
+            applyLimbTransform(rightArm, rightShoulder, rightWrist);
+
+            // Legs: Hip to Ankle
+            // For a single leg div, we can approximate by drawing from hip to ankle directly
+            applyLimbTransform(leftLeg, leftHip, leftAnkle);
+            applyLimbTransform(rightLeg, rightHip, rightAnkle);
+        }
+
+        // --- Scoring Functions (Enhanced) ---
+
+        function scoreWallAngels(landmarks) {
+            // Required landmarks for Wall Angels: Shoulders, Elbows, Wrists, Hips
+            const requiredIndices = [11, 12, 13, 14, 15, 16, 23, 24];
+            if (!areLandmarksVisible(landmarks, requiredIndices)) return 0;
+
+            const leftShoulder = landmarks[11];
+            const rightShoulder = landmarks[12];
+            const leftElbow = landmarks[13];
+            const rightElbow = landmarks[14];
+            const leftWrist = landmarks[15];
+            const rightWrist = landmarks[16];
+            const leftHip = landmarks[23];
+            const rightHip = landmarks[24];
+
+            let totalScore = 0;
+            let criteriaCount = 0;
+
+            // 1. Back against wall (shoulder and hip alignment on Y-axis)
+            // Shoulders should be roughly at the same Y-level, and hips too.
+            // Also, shoulders should be roughly above hips in X-axis (less important for wall)
+            const shoulderYDiff = Math.abs(leftShoulder.y - rightShoulder.y);
+            const hipYDiff = Math.abs(leftHip.y - rightHip.y);
+            const bodyAlignmentScore = (10 - shoulderYDiff * 100) + (10 - hipYDiff * 100); // Penalize large differences
+            totalScore += Math.max(0, bodyAlignmentScore / 2);
+            criteriaCount++;
+
+            // 2. Arms at 90 degrees (elbow angle)
+            const leftElbowAngle = calculateAngle(leftShoulder, leftElbow, leftWrist);
+            const rightElbowAngle = calculateAngle(rightShoulder, rightElbow, rightWrist);
+            const idealElbowAngle = 90; // Target 90 degrees
+            const elbowTolerance = 15; // +/- 15 degrees
+
+            const leftArmScore = 10 - (Math.abs(leftElbowAngle - idealElbowAngle) / elbowTolerance) * 10;
+            const rightArmScore = 10 - (Math.abs(rightElbowAngle - idealElbowAngle) / elbowTolerance) * 10;
+            totalScore += Math.max(0, leftArmScore);
+            totalScore += Math.max(0, rightArmScore);
+            criteriaCount += 2;
+
+            // 3. Arms sliding up (wrist Y position relative to shoulder Y)
+            // Wrists should move upwards (smaller Y value) as arms slide up.
+            // This is more about range of motion, but for a static score, we can check how "high" they are.
+            // Assuming initial position is arms down, a higher Y for wrists relative to shoulders means arms are lower.
+            // For wall angels, arms are generally up. So, wrists should be higher (smaller Y) than shoulders.
+            const leftWristRelativeY = leftWrist.y - leftShoulder.y;
+            const rightWristRelativeY = rightWrist.y - rightShoulder.y;
+
+            // Ideal: wrist Y is close to or less than shoulder Y (arms up)
+            const leftExtensionScore = 10 - Math.max(0, leftWristRelativeY * 50); // Penalize if wrist is much lower
+            const rightExtensionScore = 10 - Math.max(0, rightWristRelativeY * 50);
+            totalScore += Math.max(0, leftExtensionScore);
+            totalScore += Math.max(0, rightExtensionScore);
+            criteriaCount += 2;
+
+            return Math.min(10, Math.max(0, totalScore / criteriaCount));
+        }
+
+        function scoreCatCow(landmarks) {
+            // Required landmarks: Shoulders, Hips, Knees, Nose, Wrists
+            const requiredIndices = [11, 12, 15, 16, 23, 24, 25, 26, 0];
+            if (!areLandmarksVisible(landmarks, requiredIndices)) return 0;
+
+            const leftShoulder = landmarks[11];
+            const rightShoulder = landmarks[12];
+            const leftWrist = landmarks[15];
+            const rightWrist = landmarks[16];
+            const leftHip = landmarks[23];
+            const rightHip = landmarks[24];
+            const leftKnee = landmarks[25];
+            const rightKnee = landmarks[26];
+            const nose = landmarks[0];
+
+            let totalScore = 0;
+            let criteriaCount = 0;
+
+            // 1. Tabletop position: Wrists under shoulders, knees under hips
+            const wristShoulderXDiff = Math.abs(leftWrist.x - leftShoulder.x) + Math.abs(rightWrist.x - rightShoulder.x);
+            const kneeHipXDiff = Math.abs(leftKnee.x - leftHip.x) + Math.abs(rightKnee.x - rightHip.x);
+            const tabletopScore = (10 - wristShoulderXDiff * 50) + (10 - kneeHipXDiff * 50);
+            totalScore += Math.max(0, tabletopScore / 2);
+            criteriaCount++;
+
+            // 2. Spine Curvature (dynamic check for Cat/Cow)
+            // This is simplified. A real implementation would track the angle of the spine over time.
+            // For Cow: Belly drops, head/tailbone lift. Mid-shoulder to mid-hip line becomes more concave.
+            // For Cat: Spine rounds, chin/pelvis tuck. Mid-shoulder to mid-hip line becomes more convex.
+
+            const midShoulder = { x: (leftShoulder.x + rightShoulder.x) / 2, y: (leftShoulder.y + rightShoulder.y) / 2 };
+            const midHip = { x: (leftHip.x + rightHip.x) / 2, y: (leftHip.y + rightHip.y) / 2 };
+
+            // A simple proxy for spine curvature: relative Y position of nose and hips to shoulders.
+            // In Cow, nose goes up (smaller Y), hips go up (smaller Y) relative to shoulders.
+            // In Cat, nose goes down (larger Y), hips go down (larger Y) relative to shoulders.
+            const spineCurvatureIndicator = (nose.y - midShoulder.y) - ((leftHip.y + rightHip.y) / 2 - midShoulder.y);
+
+            // This score will fluctuate. For a real score, you'd compare current `spineCurvatureIndicator`
+            // to a target range for "cow" and "cat" positions.
+            // Let's make it dynamic to show progress, but it's not a true form score without state.
+            const dynamicScore = 5 + (5 * Math.sin(Date.now() / 1000)); // Simulates a fluctuating score
+            totalScore += dynamicScore;
+            criteriaCount++;
+
+            return Math.min(10, Math.max(0, totalScore / criteriaCount));
+        }
+
+        function scoreSpinalTwist(landmarks) {
+            // Required landmarks: Shoulders, Hips, Nose
+            const requiredIndices = [11, 12, 23, 24, 0];
+            if (!areLandmarksVisible(landmarks, requiredIndices)) return 0;
+
+            const leftShoulder = landmarks[11];
+            const rightShoulder = landmarks[12];
+            const leftHip = landmarks[23];
+            const rightHip = landmarks[24];
+            const nose = landmarks[0];
+
+            let totalScore = 0;
+            let criteriaCount = 0;
+
+            // 1. Hip Stability (hips should remain relatively stable and facing forward)
+            // The X-difference between left and right hip should be consistent.
+            const hipWidth = calculateDistance(leftHip, rightHip);
+            // If hips rotate, their Y-coordinates might differ more, or their X-span changes.
+            // For a seated twist, a key is keeping hips relatively square.
+            const hipYAlignment = Math.abs(leftHip.y - rightHip.y);
+            totalScore += (10 - hipYAlignment * 100); // Penalize vertical hip misalignment
+            criteriaCount++;
+
+            // 2. Torso Rotation (angle between shoulder line and hip line)
+            // Calculate angle of the line connecting left and right shoulders.
+            const shoulderLineAngle = Math.atan2(rightShoulder.y - leftShoulder.y, rightShoulder.x - leftShoulder.x) * (180 / Math.PI);
+            const hipLineAngle = Math.atan2(rightHip.y - leftHip.y, rightHip.x - leftHip.x) * (180 / Math.PI);
+            const twistAngle = Math.abs(shoulderLineAngle - hipLineAngle);
+            const idealTwistAngle = 45; // Target a decent twist (e.g., 45 degrees)
+            const twistTolerance = 20;
+
+            const twistScore = 10 - (Math.abs(twistAngle - idealTwistAngle) / twistTolerance) * 10;
+            totalScore += Math.max(0, twistScore);
+            criteriaCount++;
+
+            // 3. Head Alignment with twist (nose should follow torso twist)
+            const midShoulder = { x: (leftShoulder.x + rightShoulder.x) / 2, y: (leftShoulder.y + rightShoulder.y) / 2 };
+            const noseShoulderAngle = Math.atan2(nose.y - midShoulder.y, nose.x - midShoulder.x) * (180 / Math.PI);
+
+            // Nose angle should be close to shoulder line angle for proper twist.
+            const headTwistScore = 10 - (Math.abs(noseShoulderAngle - shoulderLineAngle) / twistTolerance) * 10;
+            totalScore += Math.max(0, headTwistScore);
+            criteriaCount++;
+
+            return Math.min(10, Math.max(0, totalScore / criteriaCount));
+        }
+
+        // --- Repetition Counting Functions ---
+        // These are simplified and need more robust state management for real-world use.
+        // They track a simple 'up' and 'down' state based on a key metric.
+
+        function checkWallAngelsRep(landmarks, currentScore) {
+            if (!landmarks || landmarks.length < 16) return;
+
+            const leftWrist = landmarks[15];
+            const rightWrist = landmarks[16];
+            const leftShoulder = landmarks[11];
+            const rightShoulder = landmarks[12];
+
+            // Use average wrist Y position relative to average shoulder Y position
+            const avgWristY = (leftWrist.y + rightWrist.y) / 2;
+            const avgShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
+
+            // Define 'up' and 'down' thresholds based on relative Y position
+            // Smaller Y means higher up the screen.
+            const upThreshold = avgShoulderY - 0.1; // Wrists are above shoulders
+            const downThreshold = avgShoulderY + 0.1; // Wrists are below shoulders
+
+            if (avgWristY < upThreshold && repState === 'down') {
+                repState = 'up'; // Transition to 'up' state
+            } else if (avgWristY > downThreshold && repState === 'up') {
+                repState = 'down'; // Transition to 'down' state, indicating a full rep
+                repCount++;
+                if (currentScore >= 8.0) { // Define what constitutes a "perfect" rep
+                    perfectReps++;
+                }
+                document.getElementById("reps").textContent = repCount;
+                document.getElementById("perfect-reps").textContent = perfectReps;
+            }
+        }
+
+        function checkCatCowRep(landmarks, currentScore) {
+            if (!landmarks || landmarks.length < 24) return;
+
+            const leftHip = landmarks[23];
+            const rightHip = landmarks[24];
+            const nose = landmarks[0];
+            const midShoulder = { x: (landmarks[11].x + landmarks[12].x) / 2, y: (landmarks[11].y + landmarks[12].y) / 2 };
+
+            // Use the spine curvature indicator from the scoring function
+            const spineCurvatureIndicator = (nose.y - midShoulder.y) - ((leftHip.y + rightHip.y) / 2 - midShoulder.y);
+
+            // Define thresholds for 'cat' (rounded spine) and 'cow' (arched spine)
+            // These values are relative and might need tuning based on typical pose output
+            const catThreshold = 0.05; // Larger value indicates more rounding (nose lower, hips lower)
+            const cowThreshold = -0.05; // Smaller value indicates more arching (nose higher, hips higher)
+
+            if (spineCurvatureIndicator > catThreshold && repState === 'cow') {
+                repState = 'cat'; // Transition to 'cat' state
+            } else if (spineCurvatureIndicator < cowThreshold && repState === 'cat') {
+                repState = 'cow'; // Transition to 'cow' state, indicating a full rep
+                repCount++;
+                if (currentScore >= 8.0) {
+                    perfectReps++;
+                }
+                document.getElementById("reps").textContent = repCount;
+                document.getElementById("perfect-reps").textContent = perfectReps;
+            }
+        }
+
+        function checkSpinalTwistRep(landmarks, currentScore) {
+            if (!landmarks || landmarks.length < 12) return;
+
+            const leftShoulder = landmarks[11];
+            const rightShoulder = landmarks[12];
+            const leftHip = landmarks[23];
+            const rightHip = landmarks[24];
+
+            // Use the shoulder line angle relative to the hip line angle to detect twist
+            const shoulderLineAngle = Math.atan2(rightShoulder.y - leftShoulder.y, rightShoulder.x - leftShoulder.x) * (180 / Math.PI);
+            const hipLineAngle = Math.atan2(rightHip.y - leftHip.y, rightHip.x - leftHip.x) * (180 / Math.PI);
+            const currentTwistAngle = shoulderLineAngle - hipLineAngle; // Positive for one direction, negative for other
+
+            // Define thresholds for left and right twist
+            const twistLeftThreshold = 30; // e.g., 30 degrees to the left
+            const twistRightThreshold = -30; // e.g., 30 degrees to the right
+
+            if (currentTwistAngle > twistLeftThreshold && repState === 'center') {
+                repState = 'left_twist';
+            } else if (currentTwistAngle < twistRightThreshold && repState === 'left_twist') {
+                // Completed a twist to left and back to right, or just a deep right twist
+                repState = 'right_twist';
+            } else if (Math.abs(currentTwistAngle) < 10 && (repState === 'left_twist' || repState === 'right_twist')) {
+                // Returned to center after a twist
+                repState = 'center';
+                repCount++;
+                if (currentScore >= 8.0) {
+                    perfectReps++;
+                }
+                document.getElementById("reps").textContent = repCount;
+                document.getElementById("perfect-reps").textContent = perfectReps;
+            }
+        }
+
+
+        // --- Webcam and Main Application Flow ---
+
+        // Start webcam and begin pose processing
+        async function startWebcam() {
+            let cameraStarted = false;
+            // Set a timeout to hide the loading overlay even if onloadedmetadata doesn't fire
+            const loadingTimeout = setTimeout(() => {
+                if (!cameraStarted) {
+                    loadingOverlay.style.display = 'none';
+                    showMessageBox(
+                        "Camera Initialization Issue",
+                        "The camera might be taking longer than expected to start, or there's an issue. Please ensure your camera is connected and permissions are granted."
+                    );
+                }
+            }, 10000); // 10 seconds timeout
+
+            try {
+                // Request higher resolution for better pose detection
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        facingMode: "user" // Use front camera
+                    }
+                });
+                video.srcObject = stream;
+
+                video.onloadedmetadata = () => {
+                    clearTimeout(loadingTimeout); // Clear the timeout if metadata loads
+                    loadingOverlay.style.display = 'none'; // Hide loading overlay once video loads
+                    video.play(); // Start playing the video stream
+                    cameraStarted = true;
+                };
+
+                // Create a Camera object for continuous frame processing
+                const camera = new Camera(video, {
+                    onFrame: async () => {
+                        await pose.send({ image: video }); // Send video frame to MediaPipe Pose
+                    },
+                    width: 1280,
+                    height: 720
+                });
+                camera.start(); // Start the camera stream and frame processing
+            } catch (err) {
+                clearTimeout(loadingTimeout); // Clear timeout on error
+                console.error("Error accessing webcam:", err);
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
+                showMessageBox(
+                    "Camera Access Denied",
+                    "Please allow camera access to use the AI Fitness Coach. Refresh the page and grant permissions. Error: " + err.name
+                );
+            }
+        }
+
+        // --- Event Listeners for Control Buttons ---
+
+        // Start Exercise button handler
+        document.getElementById("start-btn").addEventListener("click", () => {
+            if (exerciseInProgress) {
+                showMessageBox("Already Started", "An exercise is already in progress. Please reset to start a new one.");
+                return;
+            }
+
+            exerciseInProgress = true;
+            repCount = 0;
+            perfectReps = 0;
+            repState = 'down'; // Initial state for rep counting
+            scoreSum = 0; // Reset for new exercise
+            scoreCount = 0; // Reset for new exercise
+            averageScore = 0; // Reset for new exercise
+
+            updateFeedbackDisplay(0, exercises[currentExercise].duration, 0, 0);
+            llmFeedbackPanel.style.display = 'none'; // Hide previous LLM feedback
+
+            let timeLeft = exercises[currentExercise].duration;
+            document.getElementById("time-left").textContent = timeLeft;
+
+            // Start countdown timer
+            timerIntervalId = setInterval(() => {
+                timeLeft--;
+                document.getElementById("time-left").textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerIntervalId);
+                    timerIntervalId = null;
+                    exerciseInProgress = false;
+                    showMessageBox("Exercise Complete!", `You completed ${repCount} reps, with ${perfectReps} perfect reps.`);
+                    // The LLM feedback button is now enabled after exercise completion
+                }
+            }, 1000);
+        });
+
+        // Reset button handler
+        document.getElementById("reset-btn").addEventListener("click", () => {
+            resetExerciseState();
+            showMessageBox("Exercise Reset", "The exercise has been reset. You can now select a new exercise or start again.");
+        });
+
+        // --- Gemini API Integration for LLM Feedback ---
+        getFeedbackBtn.addEventListener("click", async () => {
+            if (exerciseInProgress) {
+                showMessageBox("Exercise in Progress", "Please complete or reset the current exercise before requesting feedback.");
+                return;
+            }
+            if (repCount === 0 && scoreCount === 0) { // Check scoreCount instead of averageScore directly
+                showMessageBox("No Exercise Data", "Please complete an exercise first to get feedback.");
+                return;
+            }
+
+            llmFeedbackPanel.style.display = 'block'; // Show the feedback panel
+            llmLoadingSpinner.style.display = 'flex'; // Show spinner
+            llmFeedbackContent.textContent = ''; // Clear previous content
+
+            const exerciseName = exercises[currentExercise].name;
+            const prompt = `You are an AI Fitness Coach. A user just completed the "${exerciseName}" exercise. They performed ${repCount} reps, with ${perfectReps} perfect reps, and an average form score of ${averageScore.toFixed(1)}/10. Provide constructive feedback on their performance. Suggest 2-3 specific, actionable tips for improving their form or performance for this exercise. Keep it concise, encouraging, and easy to understand.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will provide this at runtime
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    llmFeedbackContent.textContent = text;
+                } else {
+                    llmFeedbackContent.textContent = "Sorry, I couldn't generate feedback at this moment. Please try again.";
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                llmFeedbackContent.textContent = "Failed to connect to the AI coach. Please check your internet connection.";
+                console.error("Error calling Gemini API:", error);
+            } finally {
+                llmLoadingSpinner.style.display = 'none'; // Hide spinner
+            }
+        });
+
+
+        // --- Game Manager and Base Game Logic ---
+        const gameManager = {
+            scene: null,
+            camera: null,
+            renderer: null,
+            avatarGroup: null, // Group for all avatar parts
+            avatarBody: null, // Main avatar body mesh
+            avatarLeftLeg: null, // Left leg mesh
+            avatarRightLeg: null, // Right leg mesh
+            avatarLeftArm: null, // Left arm mesh
+            avatarRightArm: null, // Right arm mesh
+            avatarHead: null, // Head mesh
+            avatarJoints: {}, // Store Three.js mesh objects for avatar joints
+
+            worldScale: 2.5, // Scale factor to map normalized MediaPipe coords to 3D world
+
+            currentActiveGame: null, // Reference to the currently active game logic object
+            lastFrameTime: 0,
+
+            initCommonScene: function() {
+                // Scene setup
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0xddeeff); // Light blue sky
+
+                // Camera setup
+                this.camera = new THREE.PerspectiveCamera(75, gameCanvas.offsetWidth / gameCanvas.offsetHeight, 0.1, 1000);
+                this.camera.position.set(0, 1.0, 2.5); // Position camera behind and slightly above the user
+                this.camera.lookAt(0, 1, 0); // Look towards the center of the playing field
+
+                // Renderer setup
+                this.renderer = new THREE.WebGLRenderer({ canvas: gameCanvas, antialias: true });
+                this.renderer.setSize(gameCanvas.offsetWidth, gameCanvas.offsetHeight);
+                this.renderer.setPixelRatio(window.devicePixelRatio);
+
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.7); // Soft ambient light
+                this.scene.add(ambientLight);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6); // Directional light from above
+                directionalLight.position.set(0, 10, 5);
+                this.scene.add(directionalLight);
+
+                // Avatar
+                this.avatarGroup = new THREE.Group();
+                this.scene.add(this.avatarGroup);
+                this.createAvatar();
+
+                this.lastFrameTime = performance.now(); // Initialize last frame time for deltaTime
+                this.animateGameLoop(); // Start the common animation loop
+            },
+
+            createAvatar: function() {
+                this.avatarGroup.clear();
+                this.avatarJoints = {};
+
+                const jointMaterial = new THREE.MeshLambertMaterial({ color: 0x4cc9f0 }); // Accent color
+                const limbMaterial = new THREE.MeshLambertMaterial({ color: 0x4361ee }); // Primary color
+
+                const sphereGeometry = new THREE.SphereGeometry(0.08, 16, 16); // Joint radius
+
+                // Create spheres for key joints
+                const jointsToCreate = [
+                    'nose', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow',
+                    'left_wrist', 'right_wrist', 'left_hip', 'right_hip', 'left_knee',
+                    'right_knee', 'left_ankle', 'right_ankle'
+                ];
+
+                jointsToCreate.forEach(jointName => {
+                    const jointMesh = new THREE.Mesh(sphereGeometry, jointMaterial);
+                    this.avatarGroup.add(jointMesh);
+                    this.avatarJoints[jointName] = jointMesh;
+                });
+
+                // Create main body parts as individual meshes for better control
+                // Torso
+                const bodyGeometry = new THREE.BoxGeometry(0.4, 0.8, 0.2); // Width, Height, Depth
+                this.avatarBody = new THREE.Mesh(bodyGeometry, limbMaterial);
+                this.avatarGroup.add(this.avatarBody);
+
+                // Head
+                const headGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+                this.avatarHead = new THREE.Mesh(headGeometry, jointMaterial);
+                this.avatarGroup.add(this.avatarHead);
+
+                // Limbs (simplified as cylinders for now, height will be scaled)
+                const limbCylinderGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1, 8); // Radius, Radius, Height, Segments
+                this.avatarLeftLeg = new THREE.Mesh(limbCylinderGeometry, limbMaterial);
+                this.avatarRightLeg = new THREE.Mesh(limbCylinderGeometry, limbMaterial);
+                this.avatarLeftArm = new THREE.Mesh(limbCylinderGeometry, limbMaterial);
+                this.avatarRightArm = new THREE.Mesh(limbCylinderGeometry, limbMaterial);
+
+                this.avatarGroup.add(this.avatarLeftLeg);
+                this.avatarGroup.add(this.avatarRightLeg);
+                this.avatarGroup.add(this.avatarLeftArm);
+                this.avatarGroup.add(this.avatarRightArm);
+            },
+
+            // This updateAvatar now maps MediaPipe data to the 3D avatar meshes
+            updateAvatar: function(landmarks) {
+                if (!landmarks || landmarks.length < 33) {
+                    this.avatarGroup.visible = false; // Hide avatar if no landmarks
+                    return;
+                }
+                this.avatarGroup.visible = true;
+
+                // MediaPipe landmarks are normalized (0-1). Convert to Three.js world coordinates.
+                const worldYOffset = -0.1; // Adjust avatar's base Y position to sit on ground plane
+                const worldZOffset = -0.5; // Bring avatar slightly forward
+
+                const transformLandmarkToWorld = (lm) => {
+                    return new THREE.Vector3(
+                        (1 - lm.x) * this.worldScale - (this.worldScale / 2), // Flip X and scale, center around 0
+                        (1 - lm.y) * this.worldScale + worldYOffset, // Flip Y and scale (MediaPipe Y is top-down)
+                        lm.z * this.worldScale + worldZOffset // Scale Z
+                    );
+                };
+
+                // Update joint positions and visibility
+                const jointMap = {
+                    nose: landmarks[0],
+                    left_shoulder: landmarks[11],
+                    right_shoulder: landmarks[12],
+                    left_elbow: landmarks[13],
+                    right_elbow: landmarks[14],
+                    left_wrist: landmarks[15],
+                    right_wrist: landmarks[16],
+                    left_hip: landmarks[23],
+                    right_hip: landmarks[24],
+                    left_knee: landmarks[25],
+                    right_knee: landmarks[26],
+                    left_ankle: landmarks[27],
+                    right_ankle: landmarks[28]
+                };
+
+                for (const jointName in this.avatarJoints) {
+                    const lm = jointMap[jointName];
+                    if (lm && lm.visibility > 0.7) {
+                        const worldPos = transformLandmarkToWorld(lm);
+                        this.avatarJoints[jointName].position.copy(worldPos);
+                        this.avatarJoints[jointName].visible = true;
+                    } else {
+                        this.avatarJoints[jointName].visible = false;
+                    }
+                }
+
+                // Update main body parts (torso, head, limbs)
+                const leftShoulderPos = this.avatarJoints.left_shoulder.position;
+                const rightShoulderPos = this.avatarJoints.right_shoulder.position;
+                const leftHipPos = this.avatarJoints.left_hip.position;
+                const rightHipPos = this.avatarJoints.right_hip.position;
+                const nosePos = this.avatarJoints.nose.position;
+                const leftElbowPos = this.avatarJoints.left_elbow.position;
+                const rightElbowPos = this.avatarJoints.right_elbow.position;
+                const leftWristPos = this.avatarJoints.left_wrist.position;
+                const rightWristPos = this.avatarJoints.right_wrist.position;
+                const leftKneePos = this.avatarJoints.left_knee.position;
+                const rightKneePos = this.avatarJoints.right_knee.position;
+                const leftAnklePos = this.avatarJoints.left_ankle.position;
+                const rightAnklePos = this.avatarJoints.right_ankle.position;
+
+
+                // Torso
+                if (leftShoulderPos && rightShoulderPos && leftHipPos && rightHipPos) {
+                    const midShoulder = leftShoulderPos.clone().add(rightShoulderPos).multiplyScalar(0.5);
+                    const midHip = leftHipPos.clone().add(rightHipPos).multiplyScalar(0.5);
+                    this.avatarBody.position.copy(midShoulder.clone().add(midHip).multiplyScalar(0.5));
+                    this.avatarBody.scale.y = midShoulder.distanceTo(midHip) / this.avatarBody.geometry.parameters.height;
+                    this.avatarBody.lookAt(midHip);
+                    this.avatarBody.rotation.x += Math.PI / 2; // Adjust for cylinder orientation
+                    this.avatarBody.visible = true;
+                } else {
+                    this.avatarBody.visible = false;
+                }
+
+                // Head
+                if (nosePos && leftShoulderPos && rightShoulderPos) {
+                    this.avatarHead.position.copy(nosePos);
+                    this.avatarHead.visible = true;
+                } else {
+                    this.avatarHead.visible = false;
+                }
+
+                // Helper to update limb meshes
+                const updateLimbMesh = (mesh, startJointPos, endJointPos) => {
+                    if (startJointPos && endJointPos) {
+                        const distance = startJointPos.distanceTo(endJointPos);
+                        mesh.scale.y = distance / mesh.geometry.parameters.height;
+                        mesh.position.copy(startJointPos.clone().add(endJointPos).multiplyScalar(0.5));
+                        mesh.lookAt(endJointPos);
+                        mesh.rotation.x += Math.PI / 2; // Adjust for cylinder default orientation
+                        mesh.visible = true;
+                    } else {
+                        mesh.visible = false;
+                    }
+                };
+
+                // Arms
+                updateLimbMesh(this.avatarLeftArm, leftShoulderPos, leftElbowPos); // Shoulder to Elbow
+                updateLimbMesh(this.avatarRightArm, rightShoulderPos, rightElbowPos); // Shoulder to Elbow
+
+                // Legs
+                updateLimbMesh(this.avatarLeftLeg, leftHipPos, leftKneePos); // Hip to Knee
+                updateLimbMesh(this.avatarRightLeg, rightHipPos, rightKneePos); // Hip to Knee
+
+                // For the games, we might need to update the avatar's overall position based on specific landmarks
+                // The actual game logic will set the avatarGroup.position.x for lane changes or other movements.
+            },
+
+            // This method sets which game's 3D elements are visible and active
+            setGameMode: function(gameLogicObject) {
+                // First, hide all game-specific groups
+                laneDodgeGame.gameGroup.visible = false;
+                fruitCatchGame.fruitsGroup.visible = false;
+                this.avatarGroup.visible = false; // Hide avatar by default until game starts
+
+                // Reset all game states
+                laneDodgeGame.resetGame();
+                fruitCatchGame.resetGame();
+
+                this.currentActiveGame = gameLogicObject;
+
+                // Update game UI elements
+                if (gameLogicObject) {
+                    gameSpecificControlsDiv.innerHTML = gameLogicObject.getControlsHTML();
+                    // IMPORTANT: Call updateUI *after* injecting HTML to ensure elements exist
+                    gameLogicObject.updateUI();
+
+                    gameStartBtn.onclick = () => gameLogicObject.startGame();
+                    gameResetBtn.onclick = () => gameLogicObject.resetGame();
+                    gameRestartBtn.onclick = () => gameLogicObject.startGame(); // For overlay button
+                } else {
+                    gameSpecificControlsDiv.innerHTML = ''; // Clear game controls
+                    gameMessageOverlay.style.display = 'none'; // Hide overlay
+                }
+            },
+
+            animateGameLoop: function() {
+                requestAnimationFrame(() => this.animateGameLoop());
+
+                const currentTime = performance.now();
+                const deltaTime = (currentTime - this.lastFrameTime) / 1000; // Delta time in seconds
+                this.lastFrameTime = currentTime;
+
+                // Only update the logic of the currently active game
+                if (this.currentActiveGame && this.currentActiveGame.gameInProgress) {
+                    this.currentActiveGame.updateLogic(deltaTime);
+                }
+
+                if (this.renderer) {
+                    this.renderer.render(this.scene, this.camera);
+                }
+            },
+
+            onWindowResize: function() {
+                if (this.camera && this.renderer) {
+                    const canvasElement = this.renderer.domElement;
+                    this.camera.aspect = canvasElement.offsetWidth / canvasElement.offsetHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(canvasElement.offsetWidth, canvasElement.offsetHeight);
+                }
+            }
+        };
+
+        // --- Lane Dodge Game Logic ---
+        const laneDodgeGame = {
+            isInitialized: false,
+            gameInProgress: false,
+            score: 0,
+            timeSurvived: 0,
+            gameTimerInterval: null,
+            gameGroup: new THREE.Group(), // Group for all specific elements of this game
+            cars: [],
+
+            // Game parameters
+            laneWidth: 1.5, // Width of each lane in 3D units
+            roadWidth: 6, // 4 lanes * 1.5 units/lane
+            roadLength: 100, // How far the road extends
+            numLanes: 4,
+            carSpeed: 0.1, // Units per frame
+            carSpawnInterval: 1000, // Milliseconds between car spawns
+            lastCarSpawnTime: 0,
+
+            avatarLane: 1, // User starts in lane 1 (0-indexed)
+            avatarLanePositions: [], // Calculated X positions for each lane center
+
+            initGameScene: function() {
+                // Add game-specific group to the common scene
+                gameManager.scene.add(this.gameGroup);
+                this.gameGroup.visible = false; // Hidden by default
+
+                // Create road and lane markers
+                this.createRoad();
+
+                // Calculate lane center positions
+                const startX = -this.roadWidth / 2 + this.laneWidth / 2;
+                for (let i = 0; i < this.numLanes; i++) {
+                    this.avatarLanePositions.push(startX + i * this.laneWidth);
+                }
+            },
+
+            getControlsHTML: function() {
+                return `
+                    <h2>Lane Dodge Challenge</h2>
+                    <p style="margin-bottom: 15px; color: #555;">Move your legs to switch lanes and avoid oncoming cars!</p>
+                    <div class="game-stats">
+                        <div class="game-stat-card">
+                            <div class="game-stat-label">Cars Dodged</div>
+                            <div class="game-stat-value" id="lane-dodge-game-score">0</div>
+                        </div>
+                        <div class="game-stat-card">
+                            <div class="game-stat-label">Time Survived</div>
+                            <div class="game-stat-value" id="lane-dodge-game-time">0s</div>
+                        </div>
+                    </div>
+                    <div class="game-instructions">
+                        <h3>How to Play:</h3>
+                        <ul>
+                            <li>Stand facing your camera.</li>
+                            <li>Your virtual legs will move with yours.</li>
+                            <li>Move your **left leg** to control your position in lanes 1 & 2.</li>
+                            <li>Move your **right leg** to control your position in lanes 3 & 4.</li>
+                            <li>Avoid cars coming down the lanes!</li>
+                            <li>Survive as long as possible!</li>
+                        </ul>
+                    </div>
+                `;
+            },
+
+            updateUI: function() {
+                // Ensure elements exist before updating
+                const scoreElement = document.getElementById('lane-dodge-game-score');
+                const timeElement = document.getElementById('lane-dodge-game-time');
+                if (scoreElement) scoreElement.textContent = this.score;
+                if (timeElement) timeElement.textContent = `${this.timeSurvived}s`;
+            },
+
+            createRoad: function() {
+                // Main road plane
+                const roadGeometry = new THREE.PlaneGeometry(this.roadWidth, this.roadLength);
+                const roadMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+                const road = new THREE.Mesh(roadGeometry, roadMaterial);
+                road.rotation.x = -Math.PI / 2; // Lay flat
+                road.position.y = -0.01; // Slightly below ground for visual separation
+                road.position.z = -this.roadLength / 2 + gameManager.camera.position.z; // Extend road from camera
+                this.gameGroup.add(road);
+
+                // Lane markers
+                const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
+                const markerGeometry = new THREE.PlaneGeometry(0.1, 2); // Thin, short markers
+                const markerSpacing = 3; // Space between markers
+
+                for (let i = 1; i < this.numLanes; i++) { // Markers between lanes
+                    const xPos = -this.roadWidth / 2 + i * this.laneWidth;
+                    for (let z = -this.roadLength / 2; z < this.roadLength / 2; z += markerSpacing) {
+                        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                        marker.rotation.x = -Math.PI / 2;
+                        marker.position.set(xPos, 0.01, z + gameManager.camera.position.z);
+                        this.gameGroup.add(marker);
+                    }
+                }
+            },
+
+            updateAvatar: function(landmarks) {
+                gameManager.updateAvatar(landmarks); // Call common avatar update
+
+                if (!landmarks || landmarks.length < 29) return;
+
+                const leftAnkle = landmarks[27];
+                const rightAnkle = landmarks[28];
+                const leftHip = landmarks[23];
+                const rightHip = landmarks[24];
+
+                let avgX = 0;
+                if (leftHip && rightHip && leftHip.visibility > 0.7 && rightHip.visibility > 0.7) {
+                    avgX = (leftHip.x + rightHip.x) / 2;
+                } else if (leftAnkle && rightAnkle && leftAnkle.visibility > 0.7 && rightAnkle.visibility > 0.7) {
+                    avgX = (leftAnkle.x + rightAnkle.x) / 2;
+                } else {
+                    return; // No reliable leg landmarks
+                }
+
+                // Invert X for mirror effect, then map to world coordinates
+                const worldX = (1 - avgX) * gameManager.worldScale - (gameManager.worldScale / 2);
+
+                // Determine the closest lane
+                let closestLaneIndex = 0;
+                let minDistance = Infinity;
+                for (let i = 0; i < this.numLanes; i++) {
+                    const laneCenter = this.avatarLanePositions[i];
+                    const distance = Math.abs(worldX - laneCenter);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestLaneIndex = i;
+                    }
+                }
+                this.avatarLane = closestLaneIndex;
+
+                // Smoothly move avatar group to the center of the detected lane
+                const targetX = this.avatarLanePositions[this.avatarLane];
+                gameManager.avatarGroup.position.x = THREE.MathUtils.lerp(gameManager.avatarGroup.position.x, targetX, 0.1);
+            },
+
+            spawnCar: function() {
+                // Randomly choose a lane (0 to 3)
+                const lane = Math.floor(Math.random() * this.numLanes);
+                const xPos = this.avatarLanePositions[lane]; // Car appears in the center of the chosen lane
+
+                // Car dimensions
+                const carWidth = this.laneWidth * 0.8;
+                const carHeight = 0.5;
+                const carDepth = 1.5;
+
+                const carGeometry = new THREE.BoxGeometry(carWidth, carHeight, carDepth);
+                const carMaterial = new THREE.MeshLambertMaterial({ color: 0xff4444 });
+                const car = new THREE.Mesh(carGeometry, carMaterial);
+
+                car.position.set(xPos, carHeight / 2, -this.roadLength / 2); // Start far down the road
+                car.userData = { lane: lane }; // Store which lane this car is in
+                this.gameGroup.add(car); // Add car to game-specific group
+                this.cars.push(car);
+            },
+
+            updateLogic: function(deltaTime) {
+                // Update cars
+                const carsToRemove = [];
+                this.cars.forEach(car => {
+                    car.position.z += this.carSpeed * deltaTime; // Move car towards camera
+
+                    // If car passes the user, remove it and increment score
+                    if (car.position.z > gameManager.camera.position.z + 1) { // A bit past the camera
+                        carsToRemove.push(car);
+                        this.score++;
+                        this.updateUI();
+                    }
+                });
+
+                // Remove cars that have passed
+                carsToRemove.forEach(car => {
+                    this.gameGroup.remove(car);
+                    car.geometry.dispose();
+                    car.material.dispose();
+                    this.cars = this.cars.filter(c => c !== car);
+                });
+
+                this.checkCollisions();
+
+                // Spawn cars
+                const currentTime = performance.now();
+                if (currentTime - this.lastCarSpawnTime > this.carSpawnInterval) {
+                    this.spawnCar();
+                    this.lastCarSpawnTime = currentTime;
+                    // Optionally increase speed/decrease interval over time
+                    // this.carSpeed += 0.001;
+                    // this.carSpawnInterval = Math.max(500, this.carSpawnInterval - 10);
+                }
+            },
+
+            checkCollisions: function() {
+                const avatarBoundingBox = new THREE.Box3().setFromObject(gameManager.avatarBody); // Use torso for collision
+
+                for (let i = 0; i < this.cars.length; i++) {
+                    const car = this.cars[i];
+                    const carBoundingBox = new THREE.Box3().setFromObject(car);
+
+                    // Check if car is in the same lane as the avatar AND intersects
+                    if (car.userData.lane === this.avatarLane && avatarBoundingBox.intersectsBox(carBoundingBox)) {
+                        this.endGame("Crashed!");
+                        return; // Game over, stop checking
+                    }
+                }
+            },
+
+            startGame: function() {
+                if (this.gameInProgress) return;
+                this.gameInProgress = true;
+                this.score = 0;
+                this.timeSurvived = 0;
+                this.updateUI();
+                this.lastCarSpawnTime = performance.now(); // Reset spawn timer
+                this.cars.forEach(car => { // Clear all existing cars
+                    this.gameGroup.remove(car);
+                    car.geometry.dispose();
+                    car.material.dispose();
+                });
+                this.cars = [];
+                gameMessageOverlay.style.display = 'none'; // Hide overlay
+                gameManager.avatarGroup.position.x = this.avatarLanePositions[this.avatarLane]; // Reset avatar position
+
+                // Start game timer for time survived
+                this.gameTimerInterval = setInterval(() => {
+                    this.timeSurvived++;
+                    this.updateUI();
+                }, 1000);
+
+                // Make game-specific elements visible
+                this.gameGroup.visible = true;
+                gameManager.avatarGroup.visible = true;
+            },
+
+            endGame: function(message = "Game Over!") {
+                this.gameInProgress = false;
+                clearInterval(this.gameTimerInterval);
+                gameOverlayText.textContent = `${message} Score: ${this.score}`;
+                gameMessageOverlay.style.display = 'flex';
+            },
+
+            resetGame: function() {
+                this.endGame("Game Reset!"); // Stop any ongoing game
+                this.score = 0;
+                this.timeSurvived = 0;
+                // updateUI is called by setGameMode after HTML injection
+                this.cars.forEach(car => { // Clear all cars
+                    this.gameGroup.remove(car);
+                    car.geometry.dispose();
+                    car.material.dispose();
+                });
+                this.cars = [];
+                gameMessageOverlay.style.display = 'none'; // Ensure overlay is hidden
+                gameManager.avatarGroup.position.x = this.avatarLanePositions[1]; // Reset avatar to a default lane
+                this.avatarLane = 1;
+
+                // Hide game-specific elements
+                this.gameGroup.visible = false;
+                gameManager.avatarGroup.visible = false; // Hide avatar when game is reset
+            }
+        };
+
+        // --- Fruit Catch Game Logic (NEW) ---
+        const fruitCatchGame = {
+            isInitialized: false,
+            gameInProgress: false,
+            score: 0,
+            timeLeft: 0,
+            gameDuration: 60, // seconds
+            fruitSpawnInterval: 1000, // Milliseconds between fruit spawns
+            lastFruitSpawnTime: 0,
+            fruitsGroup: new THREE.Group(), // Specific group for fruits in this game
+            fruits: [],
+            missedFruitsCount: 0,
+            maxMissedFruits: 5, // Game over if this many fruits are missed
+
+            initGameScene: function() {
+                // Add game-specific group to the common scene
+                gameManager.scene.add(this.fruitsGroup);
+                this.fruitsGroup.visible = false; // Hidden by default
+
+                // Ground plane for missed fruits
+                const groundGeometry = new THREE.PlaneGeometry(10, 10);
+                const groundMaterial = new THREE.MeshBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.3 });
+                const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+                ground.rotation.x = -Math.PI / 2;
+                ground.position.y = -0.5; // Below the avatar's feet
+                this.fruitsGroup.add(ground); // Add to game-specific group
+            },
+
+            getControlsHTML: function() {
+                return `
+                    <h2>Fruit Catch Challenge</h2>
+                    <p style="margin-bottom: 15px; color: #555;">Reach out with your hands to catch the falling fruits!</p>
+                    <div class="game-stats">
+                        <div class="game-stat-card">
+                            <div class="game-stat-label">Fruits Caught</div>
+                            <div class="game-stat-value" id="fruit-catch-game-score">0</div>
+                        </div>
+                        <div class="game-stat-card">
+                            <div class="game-stat-label">Time Left</div>
+                            <div class="game-stat-value" id="fruit-catch-game-time">0s</div>
+                        </div>
+                    </div>
+                    <div class="game-instructions">
+                        <h3>How to Play:</h3>
+                        <ul>
+                            <li>Stand facing your camera.</li>
+                            <li>Your virtual avatar will mirror your movements.</li>
+                            <li>Use your **hands** to touch and catch the falling fruits.</li>
+                            <li>Each fruit caught adds to your score.</li>
+                            <li>Catch as many as you can before the time runs out!</li>
+                        </ul>
+                    </div>
+                `;
+            },
+
+            updateUI: function() {
+                // Ensure elements exist before updating
+                const scoreElement = document.getElementById('fruit-catch-game-score');
+                const timeElement = document.getElementById('fruit-catch-game-time');
+                if (scoreElement) scoreElement.textContent = this.score;
+                if (timeElement) timeElement.textContent = `${this.timeLeft}s`;
+            },
+
+            updateAvatar: function(landmarks) {
+                gameManager.updateAvatar(landmarks); // Call common avatar update
+                // For fruit catch, the avatar's overall position in the scene is fixed (centered)
+                gameManager.avatarGroup.position.set(0, 0, 0);
+            },
+
+            spawnFruit: function() {
+                const fruitGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+                const fruitMaterial = new THREE.MeshLambertMaterial({ color: 0xffcc00, emissive: 0xffcc00, emissiveIntensity: 0.3 });
+                const fruit = new THREE.Mesh(fruitGeometry, fruitMaterial);
+
+                // Spawn at random X, fixed high Y, and fixed Z (in front of avatar)
+                fruit.position.x = (Math.random() * 4) - 2; // Between -2 and 2
+                fruit.position.y = 3; // High up
+                fruit.position.z = -0.5; // In front of avatar
+
+                fruit.userData.fallSpeed = 0.05 + Math.random() * 0.05; // Randomize fall speed
+                this.fruitsGroup.add(fruit);
+                this.fruits.push(fruit);
+            },
+
+            updateLogic: function(deltaTime) {
+                // Update fruits
+                const fruitsToRemove = [];
+                this.fruits.forEach(fruit => {
+                    fruit.position.y -= fruit.userData.fallSpeed; // Make fruit fall
+
+                    // Check if fruit missed (fell below ground)
+                    if (fruit.position.y < -0.4) { // Slightly above ground plane
+                        fruitsToRemove.push(fruit);
+                        this.missedFruitsCount++;
+                        if (this.missedFruitsCount >= this.maxMissedFruits) {
+                            this.endGame("Too many missed fruits!");
+                        }
+                    }
+                });
+
+                // Remove missed fruits
+                fruitsToRemove.forEach(fruit => {
+                    this.fruitsGroup.remove(fruit);
+                    fruit.geometry.dispose();
+                    fruit.material.dispose();
+                    this.fruits = this.fruits.filter(f => f !== fruit);
+                });
+
+                this.checkCollisions();
+
+                // Spawn fruits
+                const currentTime = performance.now();
+                if (currentTime - this.lastFruitSpawnTime > this.fruitSpawnInterval) {
+                    this.spawnFruit();
+                    this.lastFruitSpawnTime = currentTime;
+                    // Optionally decrease interval over time for more difficulty
+                    // this.fruitSpawnInterval = Math.max(500, this.fruitSpawnInterval - 10);
+                }
+            },
+
+            checkCollisions: function() {
+                const leftWrist = gameManager.avatarJoints.left_wrist;
+                const rightWrist = gameManager.avatarJoints.right_wrist;
+
+                if (!leftWrist || !rightWrist || !leftWrist.visible || !rightWrist.visible) return;
+
+                const fruitsCaught = [];
+                this.fruits.forEach(fruit => {
+                    const distLeft = leftWrist.position.distanceTo(fruit.position);
+                    const distRight = rightWrist.position.distanceTo(fruit.position);
+
+                    const collisionThreshold = fruit.geometry.parameters.radius + gameManager.avatarJoints.left_wrist.geometry.parameters.radius;
+
+                    if (distLeft < collisionThreshold || distRight < collisionThreshold) {
+                        fruitsCaught.push(fruit);
+                        this.score++;
+                        this.updateUI();
+                    }
+                });
+
+                fruitsCaught.forEach(fruit => {
+                    this.fruitsGroup.remove(fruit);
+                    fruit.geometry.dispose();
+                    fruit.material.dispose();
+                    this.fruits = this.fruits.filter(f => f !== fruit);
+                });
+            },
+
+            startGame: function() {
+                if (this.gameInProgress) return;
+                this.gameInProgress = true;
+                this.score = 0;
+                this.timeLeft = this.gameDuration;
+                this.missedFruitsCount = 0;
+                this.updateUI();
+                this.lastFruitSpawnTime = performance.now();
+                this.fruits.forEach(fruit => { // Clear existing fruits
+                    this.fruitsGroup.remove(fruit);
+                    fruit.geometry.dispose();
+                    fruit.material.dispose();
+                });
+                this.fruits = [];
+                gameMessageOverlay.style.display = 'none';
+
+                // Start game timer
+                this.gameTimerInterval = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateUI();
+                    if (this.timeLeft <= 0) {
+                        this.endGame("Time's Up!");
+                    }
+                }, 1000);
+
+                // Make game-specific elements visible
+                this.fruitsGroup.visible = true;
+                gameManager.avatarGroup.visible = true;
+            },
+
+            endGame: function(message = "Game Over!") {
+                this.gameInProgress = false;
+                clearInterval(this.gameTimerInterval);
+                gameOverlayText.textContent = `${message} Score: ${this.score}`;
+                gameMessageOverlay.style.display = 'flex';
+            },
+
+            resetGame: function() {
+                this.endGame("Game Reset!");
+                this.score = 0;
+                this.timeLeft = this.gameDuration;
+                this.missedFruitsCount = 0;
+                // updateUI is called by setGameMode after HTML injection
+                this.fruits.forEach(fruit => {
+                    this.fruitsGroup.remove(fruit);
+                    fruit.geometry.dispose();
+                    fruit.material.dispose();
+                });
+                this.fruits = [];
+                gameMessageOverlay.style.display = 'none';
+
+                // Hide game-specific elements
+                this.fruitsGroup.visible = false;
+                gameManager.avatarGroup.visible = false; // Hide avatar when game is reset
+            }
+        };
+
+
+        // --- Initial Application Load ---
+        function init() {
+            // Initialize common Three.js scene and avatar once
+            gameManager.initCommonScene();
+
+            initNavTabs();          // Setup navigation tabs
+            initExerciseSelector(); // Setup exercise cards
+            initViewToggle();       // Setup view toggle buttons
+            updateInstructions();   // Load initial exercise instructions
+            startWebcam();          // Start the webcam and pose detection
+
+            // Initialize game-specific logic (but don't start them yet)
+            laneDodgeGame.initGameScene();
+            fruitCatchGame.initGameScene();
+
+            // Set initial active section (Fitness Coach by default)
+            navTabs[0].click(); // Simulate click on Fitness Coach tab to start there
+
+            window.addEventListener('resize', () => gameManager.onWindowResize());
+        }
+
+        // Ensure DOM is fully loaded before initializing
+        if (document.readyState !== 'loading') {
+            init();
+        } else {
+            document.addEventListener('DOMContentLoaded', init);
+        }
+    </script>
+</body>
+</html>
