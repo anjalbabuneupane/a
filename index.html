@@ -489,6 +489,36 @@
             window.location.href = mailtoLink;
         }
     </script>
+    <script>
+// Disable right-click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable F12, Ctrl+Shift+I/J, Ctrl+U, Ctrl+S
+document.addEventListener('keydown', event => {
+  if (
+    event.key === "F12" ||
+    (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J")) ||
+    (event.ctrlKey && (event.key === "U" || event.key === "S"))
+  ) {
+    event.preventDefault();
+  }
+});
+
+// Disable text selection and copying
+document.addEventListener('selectstart', event => event.preventDefault());
+document.addEventListener('copy', event => event.preventDefault());
+</script>
+
+<style>
+/* Disable text selection for all elements */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+</style>
+
 
 </body>
 
